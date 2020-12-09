@@ -1,0 +1,9 @@
+
+config:
+    name: 收货接口的测试套件
+
+testcases:
+-
+    name: 收货接口
+    testcase: testcases/collect_testcase.yml
+

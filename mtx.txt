@@ -1,0 +1,71 @@
+登录
+'/mtx/index.php?s=/index/user/login.html'
+headers:
+        X-Requested-With: 'XMLHttpRequest'
+accounts: yaoyao
+pwd: yaoyao
+		
+========================================	
+提交订单接口	
+'/mtx/index.php?s=/index/buy/add.html'
+		goods_id: 1
+        stock: 2
+        buy_type: goods
+        address_id: 600
+        payment_id: 1
+        spec: ""
+=============
+支付接口
+302  --->   禁止重定向allow_redirect  响应--location	是真正业务跳转的页面
+对location这个接口发起请求	
+======================
+# 登录管理员账号 /mtx/admin.php?s=/admin/login.html
+url = 'http://121.42.15.146:9090/mtx/admin.php?s=/admin/login.html'
+data = {
+    'username': 'shamo',
+    'login_pwd': 123456,
+}
+mysession1 = requests.Session()
+resp_admin_login = mysession1.post(url,data=data,headers=headers)
+print(resp_admin_login.json())
+=====================================
+############### 发货接口
+url = 'http://121.42.15.146:9090/mtx/admin.php?s=/order/delivery.html'
+# express_number	String	Y	K73487736	快递单号
+# id	int	Y	12323	订单id
+# express_id	int	Y	1	快递id
+# user_id	int	Y	10023	用户id
+备注:id和user_id都是从提交订单接口的响应值里面获取
+
+
+data = {
+    'express_number':'44444445',
+    'id':order_id,
+    'express_id':1,
+    'user_id':user_id,
+}
+resp_deli = mysession1.post(url,data=data,headers=headers)
+print(resp_deli.json())
+=================================================
+# 收货api ->http://121.42.15.146:9090/mtx/admin.php?s=/order/collect.html
+url = 'http://121.42.15.146:9090/mtx/admin.php?s=/order/collect.html'
+data = {
+    'id':order_id,
+    'value':user_id
+}
+resp_collection = mysession1.post(url,data=data,headers=headers)
+print(resp_collection.json())
+===========================================================
+#########
+# 评论接口 url = http://121.42.15.146:9090/mtx/index.php?s=/index/order/commentssave.html
+url = 'http://121.42.15.146:9090/mtx/index.php?s=/index/order/commentssave.html'
+data = {
+    'rating[]':'5',
+    'content[]':'非常好物美价廉非常好用~(｡≧3≦)ﾉ⌒☆',
+    'goods_id[]':'1',
+    'id':order_id
+
+}
+resp_comment = mysession.post(url,data=data,headers=headers)
+print(resp_comment.json())
+

@@ -1,0 +1,19 @@
+
+name: mtx登录接口
+variables:
+    accounts: ${ENV(USERNAME)}
+    pwd: ${ENV(PASSWORD)}
+    expect: 登录成功
+
+base_url: ${ENV(BASE_URL)}
+request:
+    url: /mtx/index.php?s=/index/user/login.html
+    method: POST
+    headers:
+        X-Requested-With: 'XMLHttpRequest'
+    data:
+        accounts: $accounts
+        pwd: $pwd
+validate:
+    - eq: ["status_code", 200]
+    - eq: [content.msg, $expect]

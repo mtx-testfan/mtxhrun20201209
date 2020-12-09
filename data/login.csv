@@ -1,0 +1,5 @@
+title,accounts,pwd,expect
+密码为空,yaoyao,,密码格式 6~18 个字符之间
+账号为空,,yaoyao,登录账号有误
+账号不存在,lwx,yaoyao,帐号不存在
+密码错误,yaoyao,123456,密码错误

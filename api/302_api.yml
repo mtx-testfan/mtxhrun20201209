@@ -1,0 +1,11 @@
+
+name: 302接口
+base_url: ${ENV(BASE_URL)}
+request:
+    url: $jump_url
+    method: GET
+    allow_redirects: False
+
+validate:
+    - eq: ["status_code", 302]
+

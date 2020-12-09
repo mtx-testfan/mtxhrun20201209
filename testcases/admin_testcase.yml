@@ -1,0 +1,10 @@
+config:
+    name: 管理员接口测试
+
+teststeps:
+-
+    name: 调用管理员登陆的接口
+    api: api/admin_api.yml
+
+
+
